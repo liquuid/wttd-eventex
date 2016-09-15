@@ -41,4 +41,4 @@ git push heroku master --force
 
 [![Build Status](https://travis-ci.org/liquuid/wttd-eventex.svg?branch=master)](https://travis-ci.org/liquuid/wttd-eventex)
 [![Code Health](https://landscape.io/github/liquuid/wttd-eventex/master/landscape.svg?style=flat)](https://landscape.io/github/liquuid/wttd-eventex/master)
-
+[![Coverage Status](https://coveralls.io/repos/github/liquuid/wttd-eventex/badge.svg?branch=master)](https://coveralls.io/github/liquuid/wttd-eventex?branch=master)
