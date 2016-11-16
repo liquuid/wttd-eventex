@@ -1,9 +1,10 @@
+from django.shortcuts import resolve_url
 from django.test import TestCase
 
 
 class HomeTest(TestCase):
     def setUp(self):
-        self.response = self.client.get('/')
+        self.response = self.client.get(resolve_url('home'))
 
     def test_get(self):
         """
@@ -18,4 +19,5 @@ class HomeTest(TestCase):
         self.assertTemplateUsed(self.response, 'index.html')
 
     def test_subscription_link(self):
-        self.assertContains(self.response, '/inscricao/')
+        expected = 'href="{}"'.format(resolve_url('subscriptions:new'))
+        self.assertContains(self.response, expected)
