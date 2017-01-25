@@ -4,6 +4,40 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
+def forward_course_abc_to_mti(apps, schema_editor):
+    """
+     - para cada ABC (Abstract Base Class), instanciar um MTI (Multi Table Inheritance)
+     com todos atributos
+     - salvar o MTI
+     - associar os speakers do abc no mti
+     - deletar o abc
+
+    """
+    copy_src_to_dst(apps.get_model('core', 'CourseOld'), apps.get_model('core', 'Course'))
+
+def backward_course_abc_to_mti(apps, schema_editor):
+    """
+     - para cada ABC (Abstract Base Class), instanciar um MTI (Multi Table Inheritance)
+     com todos atributos
+     - salvar o MTI
+     - associar os speakers do abc no mti
+     - deletar o abc
+
+    """
+    copy_src_to_dst(apps.get_model('core', 'CourseOld'), apps.get_model('core', 'Course'))
+
+
+def copy_src_to_dst(source, destination):
+    for src in source.objects.all():
+        dst = destination(
+            title=src.title,
+            start=src.start,
+            description=src.description,
+            slots=src.slots
+        )
+        dst.save()
+        dst.speakers.set(src.speakers.all())
+        src.delete()
 
 class Migration(migrations.Migration):
 
@@ -12,4 +46,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(forward_course_abc_to_mti)
     ]
