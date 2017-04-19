@@ -18,8 +18,6 @@ from django.contrib import admin
 
 from eventex.core.views import home, speaker_detail, talk_list
 
-#import eventex.core.views
-
 urlpatterns = [
     url(r'^$', home, name="home"),
     url(r'^inscricao/', include('eventex.subscriptions.urls',
